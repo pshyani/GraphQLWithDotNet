@@ -9,16 +9,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Orders.Schema;
+using Orders.Type;
+using Orders.Query;
 using Orders.Services;
 using GraphQL.Server;
 using GraphQL;
-using GraphQL.Server.Transports.AspNetCore;
-using GraphQL.Server.Transports.WebSockets;
 using GraphQL.Server.Ui.Playground;
 using GraphQL.Server.Ui.GraphiQL;
 using GraphQL.Server.Ui.Voyager;
 using GraphQL.Server.Ui.Altair;
-
+using GraphQL.Server.Transports.AspNetCore;
 
 namespace server
 {
@@ -39,18 +39,27 @@ namespace server
         {
             services.AddSingleton<IOrderService, OrderService>();
             services.AddSingleton<ICustomerService, CustomerService>();
+            services.AddSingleton<IOrderEventService, OrderEventService>();
+            
+            services.AddSingleton<CustomerType>();  
             services.AddSingleton<OrderType>();
-            services.AddSingleton<CustomerType>();
-            services.AddSingleton<OrderStatusesEnum>();
             services.AddSingleton<OrdersQuery>();
             services.AddSingleton<OrdersSchema>();
-            
-          //  services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
-            services.AddGraphQL((options, provider) =>
+            services.AddSingleton<OrderCreateInputType>();
+            services.AddSingleton<OrdersMutation>();
+            services.AddSingleton<OrderStatusesEnum>();
+            services.AddSingleton<OrdersSubscription>();
+            services.AddSingleton<OrderEventType>();
+            System.Diagnostics.Debug.WriteLine("server stared 1");
+            services.AddGraphQL(options =>
                 {
-                     //options.EnableMetrics = Environment.IsDevelopment();
-                    // var logger = provider.GetRequiredService<ILogger<Startup>>();
-                    // options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occured", ctx.OriginalException.Message);
+                    System.Diagnostics.Debug.WriteLine("server stared");
+                    options.EnableMetrics = true;
+                    options.ExposeExceptions = true;
+                    options.UnhandledExceptionDelegate = ctx =>
+                    {
+                        Console.WriteLine("error: " + ctx.OriginalException.Message);
+                    };
                 })
             .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
             //.AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
@@ -71,7 +80,8 @@ namespace server
             app.UseStaticFiles();
             app.UseWebSockets();
             app.UseGraphQLWebSockets<OrdersSchema>("/graphql");
-            app.UseGraphQL<OrdersSchema>("/graphql");
+            app.UseGraphQL<OrdersSchema, GraphQLHttpMiddleware<OrdersSchema>>("/graphql");   
+            //app.UseGraphQL<OrdersSchema>("/graphql");           
            // app.UseGraphQL<OrdersSchema, GraphQLHttpMiddlewareWithLogs<OrdersSchema>>("/graphql");
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {

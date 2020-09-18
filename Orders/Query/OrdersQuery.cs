@@ -1,7 +1,8 @@
 using GraphQL.Types;
 using Orders.Services;
+using Orders.Type;
 
-namespace Orders.Schema
+namespace Orders.Query
 {
     public class OrdersQuery : ObjectGraphType
     {

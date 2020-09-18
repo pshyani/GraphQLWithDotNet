@@ -1,7 +1,7 @@
 using GraphQL.Types;
 using Orders.Models;
 
-namespace Orders.Schema
+namespace Orders.Type
 {
     public class CustomerType : ObjectGraphType<Customer>
     {

@@ -2,7 +2,7 @@ using GraphQL.Types;
 using Orders.Models;
 using Orders.Services;
 
-namespace Orders.Schema
+namespace Orders.Type
 {
     public class OrderType : ObjectGraphType<Order>
     {
@@ -14,6 +14,7 @@ namespace Orders.Schema
             Field<CustomerType>("customer",
                 resolve: context => customers.GetCustomerByIdAsync(context.Source.CustomerId));
             Field(o => o.Created);
+            Field<OrderStatusesEnum>("status", resolve: context => context.Source.Status);
 
         }
     }

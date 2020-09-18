@@ -8,6 +8,12 @@ using Orders.Models;
 
 namespace Orders.Services
 {
+    public interface ICustomerService
+    {
+        Customer GetCustomerById(int id);
+        Task<Customer> GetCustomerByIdAsync(int id);
+        Task<IEnumerable<Customer>> GetCustomersAsync();
+    }
     public class CustomerService : ICustomerService
     {
        private IList<Customer> _customers;
@@ -34,12 +40,5 @@ namespace Orders.Services
         {
             return Task.FromResult(_customers.AsEnumerable());
         }
-    }
-
-    public interface ICustomerService
-    {
-        Customer GetCustomerById(int id);
-        Task<Customer> GetCustomerByIdAsync(int id);
-        Task<IEnumerable<Customer>> GetCustomersAsync();
     }
 }
