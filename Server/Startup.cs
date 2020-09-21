@@ -39,23 +39,24 @@ namespace server
         {
             services.AddSingleton<IOrderService, OrderService>();
             services.AddSingleton<ICustomerService, CustomerService>();
-            services.AddSingleton<IOrderEventService, OrderEventService>();
-            
-            services.AddSingleton<CustomerType>();  
+            services.AddSingleton<IOrderEventService, OrderEventService>();            
+           
             services.AddSingleton<OrderType>();
-            services.AddSingleton<OrdersQuery>();
-            services.AddSingleton<OrdersSchema>();
-            services.AddSingleton<OrderCreateInputType>();
-            services.AddSingleton<OrdersMutation>();
-            services.AddSingleton<OrderStatusesEnum>();
-            services.AddSingleton<OrdersSubscription>();
-            services.AddSingleton<OrderEventType>();
-            System.Diagnostics.Debug.WriteLine("server stared 1");
+            services.AddSingleton<CustomerType>();          
+
+            services.AddSingleton<OrderCreateInputType>();            
+            services.AddSingleton<OrderStatusesEnum>();            
+            services.AddSingleton<OrderEventType>();  
+
+            services.AddSingleton<RootSchema>();  
+            services.AddSingleton<RootQuery>();        
+            services.AddSingleton<RootMutation>();
+            services.AddSingleton<RootSubscription>();             
+          
             services.AddGraphQL(options =>
                 {
-                    System.Diagnostics.Debug.WriteLine("server stared");
-                    options.EnableMetrics = true;
-                    options.ExposeExceptions = true;
+                    //System.Diagnostics.Debug.WriteLine("server stared");
+                    options.EnableMetrics = true;                    
                     options.UnhandledExceptionDelegate = ctx =>
                     {
                         Console.WriteLine("error: " + ctx.OriginalException.Message);
@@ -65,7 +66,7 @@ namespace server
             //.AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
             .AddWebSockets()
             .AddDataLoader()
-            .AddGraphTypes(typeof(OrdersSchema));;         
+            .AddGraphTypes(typeof(RootSchema));            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,14 +76,13 @@ namespace server
             {
                 app.UseDeveloperExceptionPage();
             }
-
+           
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseWebSockets();
-            app.UseGraphQLWebSockets<OrdersSchema>("/graphql");
-            app.UseGraphQL<OrdersSchema, GraphQLHttpMiddleware<OrdersSchema>>("/graphql");   
-            //app.UseGraphQL<OrdersSchema>("/graphql");           
-           // app.UseGraphQL<OrdersSchema, GraphQLHttpMiddlewareWithLogs<OrdersSchema>>("/graphql");
+            app.UseGraphQLWebSockets<RootSchema>("/graphql");
+            app.UseGraphQL<RootSchema, GraphQLHttpMiddleware<RootSchema>>("/graphql"); 
+
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
                 Path = "/ui/playground",                

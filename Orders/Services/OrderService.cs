@@ -48,12 +48,12 @@ namespace Orders.Services
             var orderEvent = new OrderEvent(order.Id, order.Name, OrderStatuses.CREATED, DateTime.Now);
             _events.AddEvent(orderEvent);
             return Task.FromResult(order);
-
         }
 
         public Task<Order> GetOrderByIdAsync(string id)
         {
-            return Task.FromResult(_orders.Single(P => Equals(P.Id == id)));
+            var order = GetById(id);
+            return Task.FromResult(order);
         }
 
         public Task<IEnumerable<Order>> GetOrdersAsync()

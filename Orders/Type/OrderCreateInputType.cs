@@ -10,7 +10,7 @@ namespace Orders.Type
             Field<NonNullGraphType<StringGraphType>>("name");
             Field<NonNullGraphType<StringGraphType>>("description");
             Field<NonNullGraphType<IntGraphType>>("customerId");
-            Field<NonNullGraphType<DateGraphType>>("created");           
+            Field<NonNullGraphType<DateTimeGraphType>>("created");           
         }
     }
 }

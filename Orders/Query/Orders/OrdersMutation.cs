@@ -31,9 +31,10 @@ namespace Orders.Schema
                     new QueryArgument<NonNullGraphType<StringGraphType>> { Name="orderId"}),
                 resolve: async context => {
                     var orderId = context.GetArgument<string>("orderId");
-                    return await context.TryAsyncResolve(
-                        async c => await orderService.StartAsync(orderId)
-                    );
+                    return await orderService.StartAsync(orderId);
+                    // return await context.TryAsyncResolve(
+                    //     async c => await orderService.StartAsync(orderId)
+                    // );
                 }
             );
         }
