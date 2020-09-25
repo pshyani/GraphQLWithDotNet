@@ -1,6 +1,6 @@
 using GraphQL.Types;
 
-namespace Service_API.Type
+namespace GraphQl.API.Type
 {
     public class OrderCreateInputType : InputObjectGraphType
     {

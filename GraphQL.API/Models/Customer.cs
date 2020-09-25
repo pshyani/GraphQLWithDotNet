@@ -1,4 +1,4 @@
-namespace Service_API.Models
+namespace GraphQl.API.Models
 {
     public class Customer
     {

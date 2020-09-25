@@ -1,7 +1,7 @@
 using GraphQL.Types;
-using Service_API.Models;
+using GraphQl.API.Models;
 
-namespace Service_API.Type
+namespace GraphQl.API.Type
 {
     public class OrderEventType : ObjectGraphType<OrderEvent>
     {

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Concurrent;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using Service_API.Models;
+using GraphQl.API.Models;
 
-namespace Service_API.Services
+namespace GraphQl.API.Services
 {
     public interface IOrderEventService
     {

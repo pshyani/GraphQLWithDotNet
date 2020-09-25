@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Service_API.Models;
+using GraphQl.API.Models;
 
-namespace Service_API.Services
+namespace GraphQl.API.Services
 {
     public interface ICustomerService
     {
