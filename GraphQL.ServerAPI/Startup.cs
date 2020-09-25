@@ -20,7 +20,7 @@ using GraphQL.Server.Ui.Voyager;
 using GraphQL.Server.Ui.Altair;
 using GraphQL.Server.Transports.AspNetCore;
 
-namespace server
+namespace GraphQl.ServerAPI
 {
     public class Startup
     {
