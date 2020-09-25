@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Orders.Models;
+using Service_API.Models;
 
-namespace Orders.Services
+namespace Service_API.Services
 {
      public interface IOrderService
     {         

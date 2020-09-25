@@ -1,9 +1,9 @@
 using GraphQL;
 using GraphQL.Types;
-using Orders.Services;
-using Orders.Type;
+using Service_API.Services;
+using Service_API.Type;
 
-namespace Orders.Query
+namespace Service_API.Query
 {
     public class CustomerQuery : ObjectGraphType
     {

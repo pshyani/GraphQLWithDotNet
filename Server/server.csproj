@@ -23,6 +23,6 @@
     <PackageReference Include="GraphQL-Dotnet-Extensions" Version="1.0.0"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Orders\Orders.csproj"/>
+    <ProjectReference Include="..\Service_API\Service_API.csproj"/>
   </ItemGroup>
 </Project>

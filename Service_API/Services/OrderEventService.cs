@@ -2,9 +2,9 @@ using System;
 using System.Collections.Concurrent;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using Orders.Models;
+using Service_API.Models;
 
-namespace Orders.Services
+namespace Service_API.Services
 {
     public interface IOrderEventService
     {

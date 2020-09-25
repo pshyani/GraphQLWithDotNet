@@ -1,12 +1,12 @@
 using GraphQL;
 using GraphQL.Types;
-using Orders.Services;
+using Service_API.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Orders.Query;
+using Service_API.Query;
 
-namespace Orders.Schema
+namespace Service_API.Schema
 {
     public class RootSchema : GraphQL.Types.Schema
     {

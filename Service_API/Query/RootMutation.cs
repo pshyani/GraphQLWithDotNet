@@ -1,11 +1,11 @@
 using System;
 using GraphQL;
 using GraphQL.Types;
-using Orders.Models;
-using Orders.Services;
-using Orders.Type;
+using Service_API.Models;
+using Service_API.Services;
+using Service_API.Type;
 
-namespace Orders.Schema
+namespace Service_API.Schema
 {
     public class RootMutation : ObjectGraphType
     {

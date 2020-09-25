@@ -1,8 +1,8 @@
 using GraphQL.Types;
-using Orders.Models;
-using Orders.Services;
+using Service_API.Models;
+using Service_API.Services;
 
-namespace Orders.Type
+namespace Service_API.Type
 {
     public class OrderType : ObjectGraphType<Order>
     {
